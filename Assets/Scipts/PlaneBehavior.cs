@@ -21,13 +21,23 @@ public class PlaneBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        FaceMouse();
     }
 
+    // taken from KingP movement script
     void FixedUpdate()
     {
-        Vector3 mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 targetPosition = new Vector2(mousePosG.x, mousePosG.y);
-        body.MovePosition(Vector2.MoveTowards(body.position, targetPosition, speed * Time.fixedDeltaTime));
+        mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
+        newPosition = Vector2.MoveTowards(transform.position, mousePosG, speed * Time.fixedDeltaTime);
+        body.MovePosition(newPosition);
+    }
+
+    // taken from youtube: Unity C# - How to face the mouse position in 2D
+    // link: https://www.youtube.com/watch?v=_XdqA3xbP2A&list=LL&index=1&t=90s
+    void FaceMouse()
+    {
+        Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+        transform.up = direction;
     }
 }
