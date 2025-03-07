@@ -533,8 +533,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 977a4d2c97b5744eb8926e2dda92c84c, type: 3}
   m_Resource: {fileID: 8300000, guid: 977a4d2c97b5744eb8926e2dda92c84c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
-  m_Pitch: 1
+  m_Volume: 0.7
+  m_Pitch: 1.1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -871,7 +871,11 @@ PrefabInstance:
       objectReference: {fileID: 1654315559}
     - target: {fileID: 7625758533720031212, guid: e8770d0b8ffc741e8a8f1eb91bee0eaf, type: 3}
       propertyPath: speed
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625758533720031212, guid: e8770d0b8ffc741e8a8f1eb91bee0eaf, type: 3}
+      propertyPath: audioSources.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9069989254141204404, guid: e8770d0b8ffc741e8a8f1eb91bee0eaf, type: 3}
       propertyPath: m_Name
