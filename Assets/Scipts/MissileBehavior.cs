@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class MissileBehavior : MonoBehaviour
 {
-    public float minX = -9.09f;
-    public float maxX = 9.11f;
-    public float minY = -4.15f;
-    public float maxY = 4.21f;
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
     public float speed;
     Vector2 targetPosition;
 

@@ -7,7 +7,6 @@ public class PlaneBehavior : MonoBehaviour
     public Vector2 newPosition;
     public Vector3 mousePosG;
     public float speed;
-    public AudioSource[] audioSources;
     public Camera cam;
     public Rigidbody2D body;
 

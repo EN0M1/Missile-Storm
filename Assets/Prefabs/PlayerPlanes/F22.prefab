@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 544481370435782383}
   - component: {fileID: 7625758533720031212}
   - component: {fileID: -1076229864328248323}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: F22
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,10 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newPosition: {x: 0, y: 0}
   mousePosG: {x: 0, y: 0, z: 0}
-  speed: 5
-  audioSources:
-  - {fileID: 0}
-  - {fileID: 0}
+  speed: 10
   cam: {fileID: 0}
   body: {fileID: 0}
 --- !u!82 &-1076229864328248323
