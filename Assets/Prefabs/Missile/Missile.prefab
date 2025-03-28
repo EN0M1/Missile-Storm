@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6152732085290708231}
   m_Layer: 0
   m_Name: Missile
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974093907814809133}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -7.39, y: -2.24, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!212 &7560940807574757820
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -4478703775913692564, guid: 5f9486645f172472ba1c76e0b39fc299, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -115,7 +115,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &630450916108892363
 MonoBehaviour:
@@ -133,7 +133,8 @@ MonoBehaviour:
   maxX: 0
   minY: 0
   maxY: 0
-  speed: 0
+  speed: 12
+  turnSpeed: 150
   target: {fileID: 0}
 --- !u!60 &6152732085290708231
 PolygonCollider2D:

@@ -7,6 +7,7 @@ public class MissileBehavior : MonoBehaviour
     public float minY;
     public float maxY;
     public float speed;
+    public float turnSpeed;
     Vector2 targetPosition;
 
     public GameObject target;
@@ -22,24 +23,14 @@ public class MissileBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        FacePlane();
     }
 
     void FixedUpdate()
     {
-        Vector2 targetPosition = target.transform.position;
-
-        body = GetComponent<Rigidbody2D>();
-        Vector2 currentPosition = body.position;
-    
-        float distance = Vector2.Distance(currentPosition, targetPosition);
-        if (distance > 0.1)
+        if (target != null)
         {
-            float difficulty = getDifficultyPercentage();
-        
-            speed = speed * Time.deltaTime;
-            Vector2 newPosition = Vector2.MoveTowards(currentPosition, targetPosition, speed);
-            body.MovePosition(newPosition);
+            TrackPlane();
         }
         else
         {
@@ -47,36 +38,44 @@ public class MissileBehavior : MonoBehaviour
         }
     }
 
+    void FacePlane()
+    {
+        Vector2 direction = (target.transform.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        float newAngle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+    }
+
+    void TrackPlane()
+    {
+        body.linearVelocity = transform.up * speed;
+    }
+
     Vector2 getRandomPosition()
     {   
         float randX = Random.Range(minX, maxX);
         float randY = Random.Range(minY, maxY);
-        Vector2 v = new Vector2(randX, randY);
-        return v;
+        return new Vector2(randX, randY);
     }
-
-    private float getDifficultyPercentage() 
-    {
-        float difficulty = Mathf.Clamp01(Time.timeSinceLevelLoad);
-        return difficulty;
-    }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.tag == "Missile")
         {
             explode();
         }
         if (collision.gameObject.tag == "Plane")
         {
-            // game over;
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
+        */
     }
 
     public void initialPosition() 
     {
-        body = GetComponent<Rigidbody2D>();
         body.position = getRandomPosition();
         targetPosition = getRandomPosition();
     }
@@ -86,8 +85,10 @@ public class MissileBehavior : MonoBehaviour
         target = plane;
     }
 
+    /*
     public void explode()
     {
-
+        Destroy(gameObject);
     }
+    */
 }

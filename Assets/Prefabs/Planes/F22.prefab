@@ -227,6 +227,7 @@ MonoBehaviour:
   newPosition: {x: 0, y: 0}
   mousePosG: {x: 0, y: 0, z: 0}
   speed: 10
+  turnSpeed: 200
   cam: {fileID: 0}
   body: {fileID: 0}
 --- !u!82 &-1076229864328248323

@@ -16,4 +16,10 @@ public class CameraBehavior : MonoBehaviour
     {
         transform.position = player.transform.position + offset;
     }
+
+    public void SetTarget(GameObject newTarget)
+    {
+        player = newTarget;
+        offset = transform.position - player.transform.position;
+    }
 }
