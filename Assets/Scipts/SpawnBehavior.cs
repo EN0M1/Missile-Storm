@@ -1,70 +1,47 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SpawnBehavior : MonoBehaviour
 {
-    public Planes planesDB;
     public GameObject[] missileVariants;
     public GameObject targetObject;
-    GameObject newObject;
-    public float startTime;
-    public float spawnRatio = 5.0f;
-    public float minSpawn;
-    public float maxSpawn;
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
+    public CameraBehavior cameraBehavior;
+    public Camera mainCamera;
+    public float lastSpawnTime;
+    public float spawnCooldown;
+    public float spawnDistance = 7.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spawnPlane();
-        spawnMissile();
+        mainCamera = Camera.main;
+        lastSpawnTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float currentTime = Time.time;
-        float timeElapsed = currentTime - startTime;
-        if (timeElapsed > spawnRatio)
+        if (Time.time - lastSpawnTime >= spawnCooldown)
         {
             spawnMissile();
+            lastSpawnTime = Time.time;
         }
     }
 
     void spawnMissile()
     {
-        int numVariants = missileVariants.Length;
-        if (numVariants > 0)
-        {
-            int selection = Random.Range(0, numVariants);
-            newObject = Instantiate(missileVariants[selection], new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-            MissileBehavior missileBehavior = newObject.GetComponent<MissileBehavior>();
-            missileBehavior.initialPosition();
-        }
+        if (missileVariants.Length == 0 || cameraBehavior == null || targetObject == null) return;
 
-        spawnRatio = Random.Range(minSpawn, maxSpawn);
-    }
+        int selection = Random.Range(0, missileVariants.Length);
+        Vector3 planePosition = targetObject.transform.position;
+        Vector3 planeForward = targetObject.transform.up;
 
-    void spawnPlane()
-    {
-        targetObject = Instantiate(planesDB.getPlane(PlaneManager.selection).prefab,
-            new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        Vector3 spawnPos = planePosition + planeForward * spawnDistance;
 
-        CameraBehavior cameraScript = Camera.main.GetComponent<CameraBehavior>();
-        cameraScript.SetTarget(targetObject);
+        GameObject newMissile = Instantiate(missileVariants[selection], spawnPos, Quaternion.identity);
 
-        updateMissileTargets(targetObject);
-    }
+        MissileBehavior missileBehavior = newMissile.GetComponent<MissileBehavior>();
 
-    // ChatGPT used
-    void updateMissileTargets(GameObject newTarget)
-    {
-        MissileBehavior[] missiles = FindObjectsByType<MissileBehavior>(FindObjectsSortMode.None);
-        foreach (MissileBehavior missile in missiles)
-        {
-            missile.setTarget(newTarget);
-        }
+        missileBehavior.setTarget(targetObject);
     }
 }

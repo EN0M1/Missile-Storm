@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 630450916108892363, guid: 4db4b242025b34be49bd937eeff10bc1, type: 3}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1974093907814809133, guid: 4db4b242025b34be49bd937eeff10bc1, type: 3}
       propertyPath: m_Name
-      value: Missile
+      value: FasterMissile
       objectReference: {fileID: 0}
     - target: {fileID: 2045890501657710982, guid: 4db4b242025b34be49bd937eeff10bc1, type: 3}
       propertyPath: m_LocalPosition.x

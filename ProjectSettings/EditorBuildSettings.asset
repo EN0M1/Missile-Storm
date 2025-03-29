@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Prefabs/Scenes/MainMenu.unity
     guid: adfa59591c493466eb1d709640464d13
   - enabled: 1
-    path: Assets/Scenes/GamePlay.unity
+    path: Assets/Prefabs/Scenes/GamePlay.unity
     guid: 63d5f00bd83a14c1391f5e8a888a7459
   - enabled: 1
-    path: Assets/Scenes/PlaneSelection.unity
+    path: Assets/Prefabs/Scenes/PlaneSelection.unity
     guid: de47a674155b64c10b0cb778c156fb3d
+  - enabled: 1
+    path: Assets/Prefabs/Scenes/GameOver.unity
+    guid: 34efd611574034765a6bb87490a09d37
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

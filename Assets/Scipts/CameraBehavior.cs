@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraBehavior : MonoBehaviour
 {
@@ -15,11 +17,5 @@ public class CameraBehavior : MonoBehaviour
     void LateUpdate()
     {
         transform.position = player.transform.position + offset;
-    }
-
-    public void SetTarget(GameObject newTarget)
-    {
-        player = newTarget;
-        offset = transform.position - player.transform.position;
     }
 }

@@ -62,4 +62,17 @@ public class PlaneBehavior : MonoBehaviour
     {
         body.linearVelocity = transform.up * speed;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Missile"))
+        {
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 }
