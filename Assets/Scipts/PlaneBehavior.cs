@@ -6,10 +6,18 @@ public class PlaneBehavior : MonoBehaviour
 {
     public Vector2 newPosition;
     public Vector3 mousePosG;
+    public float start;
     public float speed;
     public float turnSpeed;
     public Camera cam;
     public Rigidbody2D body;
+    public float baseSpeed;
+    public float dashSpeed;
+    public float dashDuration;
+    public bool dashing;
+    public static float cooldownRate;
+    public float endLastDash;
+    public static float cooldown = 0.0f;
 
     public GameObject explosionEffect;
 
@@ -24,6 +32,7 @@ public class PlaneBehavior : MonoBehaviour
     void Update()
     {
         RotateTowardsMouse();
+        Dash();
     }
 
     // taken from KingP movement script
@@ -84,5 +93,35 @@ public class PlaneBehavior : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene(sceneName);
         Destroy(gameObject);
+    }
+
+    // KingP
+    private void Dash()
+    {
+        if (dashing == true)
+        {
+            float currenttime = Time.time;
+            float timeDashing = currenttime - start;
+            if (timeDashing > dashDuration)
+            {
+                dashing = false;
+                speed = baseSpeed;
+                cooldown = cooldownRate;
+            }
+        }
+        else
+        {
+            cooldown = cooldown - Time.deltaTime;
+            if (cooldown < 0.0)
+            {
+                cooldown = 0.0f;
+            }
+            if (cooldown == 0.0 && Input.GetMouseButtonDown(0))
+            {
+                dashing = true;
+                speed = dashSpeed;
+                start = Time.time;
+            }
+        }
     }
 }

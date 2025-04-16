@@ -47,6 +47,14 @@ public class MissileTracking : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             rb.linearVelocity = Vector2.zero;
         }
+        if (other.CompareTag("Missile"))
+        {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     private IEnumerator WaitAndLoadScene(string sceneName)

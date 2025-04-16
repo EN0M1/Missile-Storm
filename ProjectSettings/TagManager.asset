@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cloud
   - Missile
+  - Overlay
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI_background
+    uniqueID: 1661455683
+    locked: 0
+  - name: UI_main
+    uniqueID: 3833370273
+    locked: 0
+  - name: UI_top
+    uniqueID: 722430823
     locked: 0
   m_RenderingLayers:
   - Default

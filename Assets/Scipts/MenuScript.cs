@@ -20,6 +20,16 @@ public class MenuScript : MonoBehaviour
         StartCoroutine(WaitForSoundAndTransition("PlaneSelection"));
     }
 
+    public void GoToTutorial()
+    {
+        StartCoroutine(WaitForSoundAndTransition("HowToPlay"));
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     private IEnumerator WaitForSoundAndTransition(string sceneName)
     {
         AudioSource audioSource = GetComponentInChildren<AudioSource>();
