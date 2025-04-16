@@ -229,7 +229,8 @@ MonoBehaviour:
   speed: 10
   turnSpeed: 200
   cam: {fileID: 0}
-  body: {fileID: 0}
+  body: {fileID: -5257721918440254121}
+  explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
 --- !u!82 &-1076229864328248323
 AudioSource:
   m_ObjectHideFlags: 0

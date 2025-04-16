@@ -1,47 +1,40 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class SpawnBehavior : MonoBehaviour
 {
-    public GameObject[] missileVariants;
-    public GameObject targetObject;
-    public CameraBehavior cameraBehavior;
-    public Camera mainCamera;
-    public float lastSpawnTime;
-    public float spawnCooldown;
-    public float spawnDistance = 7.0f;
+    [SerializeField]
+    private GameObject enemyPrefab;
+
+    [SerializeField]
+    private float minSpawnTime;
+
+    [SerializeField]
+    private float maxSpawnTime;
+
+    private float timeUntilSpawn;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        mainCamera = Camera.main;
-        lastSpawnTime = Time.time;
+        setTimeUntilSpawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastSpawnTime >= spawnCooldown)
+        timeUntilSpawn -= Time.deltaTime;
+
+        if (timeUntilSpawn <= 0)
         {
-            spawnMissile();
-            lastSpawnTime = Time.time;
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            setTimeUntilSpawn();
         }
     }
 
-    void spawnMissile()
+    private void setTimeUntilSpawn()
     {
-        if (missileVariants.Length == 0 || cameraBehavior == null || targetObject == null) return;
-
-        int selection = Random.Range(0, missileVariants.Length);
-        Vector3 planePosition = targetObject.transform.position;
-        Vector3 planeForward = targetObject.transform.up;
-
-        Vector3 spawnPos = planePosition + planeForward * spawnDistance;
-
-        GameObject newMissile = Instantiate(missileVariants[selection], spawnPos, Quaternion.identity);
-
-        MissileBehavior missileBehavior = newMissile.GetComponent<MissileBehavior>();
-
-        missileBehavior.setTarget(targetObject);
+        timeUntilSpawn = Random.Range(minSpawnTime, maxSpawnTime);
     }
 }

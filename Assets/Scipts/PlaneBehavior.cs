@@ -11,6 +11,8 @@ public class PlaneBehavior : MonoBehaviour
     public Camera cam;
     public Rigidbody2D body;
 
+    public GameObject explosionEffect;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,16 +65,24 @@ public class PlaneBehavior : MonoBehaviour
         body.linearVelocity = transform.up * speed;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Missile"))
+        if (other.CompareTag("Missile"))
         {
-            GameOver();
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+
+            StartCoroutine(WaitAndLoadScene("GameOver"));
+
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            body.linearVelocity = Vector2.zero;
         }
     }
 
-    void GameOver()
+    private IEnumerator WaitAndLoadScene(string sceneName)
     {
-        SceneManager.LoadScene("GameOver");
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(sceneName);
+        Destroy(gameObject);
     }
 }
